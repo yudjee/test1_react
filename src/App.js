@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {deletePost, openComments} from './actions/posts'
 import {BrowserRouter, Route} from 'react-router-dom'
 
-
 import Popup from './components/popup'
 import Table from './components/table'
 

@@ -87,12 +87,27 @@ export default (state = initialState, action) => {
         currentPage: action.payload
       };
     case 'CLOSE_COMMENTS':
+
       return {
         ...state,
         url: '/',
         currentPage: null
       };
+    case 'DELETE_COMMENTS':
+      const index = state.posts.findIndex(el => el.postId === action.id)
+      
+      let newCom = [];
+      for(let i=0; i < state.posts.length; i++) {
+        if(state.posts[i].postId === action.id) {
+          newCom = state.posts[i].comments.filter(comment => comment.text !== action.text)
+        }
+      }
+      console.log(newCom)
+      return {
+        ...state,
+        posts: [...state.posts, state.posts[index].comments=newCom]
 
+      };
 
 		default:
 			return state 

@@ -8,6 +8,12 @@ export const openComments = id => ({
   payload: id,
 });
 
-export const closeComments = id => ({
+export const closeComments = () => ({
   type: 'CLOSE_COMMENTS'
+});
+
+export const deleteComment = (text, id) => ({
+  type: 'DELETE_COMMENTS',
+  text,
+  id,
 });
