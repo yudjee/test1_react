@@ -1,19 +1,34 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {deletePost, openComments} from './actions/posts'
+import {deletePost, openComments, setPosts} from './actions/posts'
 import {BrowserRouter, Route} from 'react-router-dom'
+import axios from 'axios'
 
 import Popup from './components/popup'
 import Table from './components/table'
+import Loader from './components/loader'
 
 
 
 class App extends Component {
 
+	componentWillMount() {
+
+		const { setPosts } = this.props;
+		axios.get('/data.json').then(response => {
+			setPosts(response.data)
+		}).catch(function (error) {
+		    console.log(error);
+		})
+
+
+
+	}
+
 	render() {
 
 		const {posts, deletePost, openComments} = this.props
-		const {url, currentPage} = posts
+		const {url, currentPage, isReady} = posts
 		const articlesQuantity = posts.posts.length
 		let commentsQuantity = 0;
 
@@ -25,7 +40,9 @@ class App extends Component {
 			<BrowserRouter>
 			<div className="container">
 				<h2>Articles</h2>
-				<Table posts={posts} deletePost={deletePost} openComments={openComments}/>
+				{isReady ? 
+					<Table posts={posts} deletePost={deletePost} openComments={openComments}/> 
+					: <Loader /> }
 				<div className="container mt-10">
 					<div className="row">
 						<div className="col p-3 m-2 border border-dark about">
@@ -41,6 +58,7 @@ class App extends Component {
 			</div>
 			{ currentPage != null ? <Route path={url} component={Popup} /> : null }
 			</BrowserRouter >
+
 		)
 	}
 
@@ -53,6 +71,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => ({
 	deletePost: (id) => dispatch(deletePost(id)),
 	openComments: (id) => dispatch(openComments(id)),
+	setPosts: (posts) => dispatch(setPosts(posts))
 })
 
 export default connect(

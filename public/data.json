@@ -3,6 +3,7 @@
     {
       "postId": 1,
       "name": "Post 1",
+      "content": "content post 1",
       "date": "04.02.2018",
       "comments": [
         {
@@ -26,6 +27,7 @@
     {
       "postId": 2,
       "name": "Post 2",
+      "content": "content post 2",
       "date": "04.03.2018",
       "comments": [
         {
@@ -45,6 +47,7 @@
     {
       "postId": 3,
       "name": "Post 3",
+      "content": "content post 3",
       "date": "10.04.2018",
       "comments": [
         {

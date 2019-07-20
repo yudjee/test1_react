@@ -1,5 +1,5 @@
 const initialState = {
-	posts: [
+	/*posts: [
     {
       "postId": 1,
       "name": "Post 1",
@@ -68,13 +68,22 @@ const initialState = {
         }
       ]
     }
-  ],
+  ],*/
+  posts: [],
   url: '/',
-  currentPage: null
+  currentPage: null,
+  isReady: false
 }
 
 export default (state = initialState, action) => {
 	switch(action.type) {
+    
+    case 'SET_POSTS':
+      return {
+        ...state,
+        posts: action.payload.posts,
+        isReady:true
+      };
 		case 'DELETE_POST':
 			return {
         ...state,
@@ -102,11 +111,19 @@ export default (state = initialState, action) => {
           newCom = state.posts[i].comments.filter(comment => comment.text !== action.text)
         }
       }
-      console.log(newCom)
-      return {
-        ...state,
-        posts: [...state.posts, state.posts[index].comments=newCom]
 
+      const newState = []
+      for (let j =0; j < state.posts.length; j++) {
+        if(j === index) {
+          newState.push({...state.posts[j], comments: newCom})
+        } else {
+          newState.push({...state.posts[j]})
+        }
+      }
+
+
+      return {
+        posts: newState
       };
 
 		default:

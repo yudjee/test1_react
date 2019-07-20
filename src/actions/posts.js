@@ -1,3 +1,8 @@
+export const setPosts = posts => ({
+  type: 'SET_POSTS',
+  payload: posts
+});
+
 export const deletePost = id => ({
   type: 'DELETE_POST',
   payload: id,
