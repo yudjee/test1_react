@@ -40,9 +40,8 @@ class App extends Component {
 			<BrowserRouter>
 			<div className="container">
 				<h2>Articles</h2>
-				{isReady ? 
-					<Table posts={posts} deletePost={deletePost} openComments={openComments}/> 
-					: <Loader /> }
+				
+				<Table posts={posts} deletePost={deletePost} openComments={openComments}/>	
 				<div className="container mt-10">
 					<div className="row">
 						<div className="col p-3 m-2 border border-dark about">
@@ -56,7 +55,7 @@ class App extends Component {
 					</div>
 				</div>
 			</div>
-			{ currentPage != null ? <Route path={url} component={Popup} /> : null }
+			{ currentPage != null ? <Route exact path={url} component={Popup} /> : null }
 			</BrowserRouter >
 
 		)
